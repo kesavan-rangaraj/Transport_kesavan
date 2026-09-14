@@ -1486,7 +1486,6 @@ const ADMIN_PASSWORD =
 
 function getUserId() {
 
-
     let userId =
         localStorage.getItem(
             "transportUserId"
@@ -1494,7 +1493,6 @@ function getUserId() {
 
 
     if (!userId) {
-
 
         userId =
             "USER-" +
@@ -1510,7 +1508,6 @@ function getUserId() {
             userId
         );
 
-
     }
 
 
@@ -1520,11 +1517,194 @@ function getUserId() {
 
 
 /* =====================================================
+   STANDARD DATE/TIME FORMAT
+   SAME DISPLAY FORMAT ON EVERY DEVICE
+===================================================== */
+
+function formatDateTime(value) {
+
+    if (!value) {
+
+        return "";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if (
+        isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return value;
+
+    }
+
+
+    const day =
+        String(
+            date.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const monthNames = [
+
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+
+    ];
+
+
+    const month =
+        monthNames[
+            date.getMonth()
+        ];
+
+
+    const year =
+        date.getFullYear();
+
+
+    let hours =
+        date.getHours();
+
+
+    const minutes =
+        String(
+            date.getMinutes()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const ampm =
+        hours >= 12
+            ? "PM"
+            : "AM";
+
+
+    hours =
+        hours % 12;
+
+
+    if (
+        hours === 0
+    ) {
+
+        hours = 12;
+
+    }
+
+
+    hours =
+        String(
+            hours
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+        day +
+        " " +
+        month +
+        " " +
+        year +
+        ", " +
+        hours +
+        ":" +
+        minutes +
+        " " +
+        ampm
+    );
+
+}
+
+
+/* =====================================================
+   LOCAL DATE
+   PREVENTS UTC DATE SHIFT
+===================================================== */
+
+function getLocalDate() {
+
+    const now =
+        new Date();
+
+
+    const year =
+        now.getFullYear();
+
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+        year +
+        "-" +
+        month +
+        "-" +
+        day
+    );
+
+}
+
+
+/* =====================================================
+   TODAY
+===================================================== */
+
+function setToday() {
+
+    document
+        .getElementById(
+            "entryDate"
+        )
+        .value =
+            getLocalDate();
+
+}
+
+
+/* =====================================================
    CHANGE ROLE
 ===================================================== */
 
 function changeRole() {
-
 
     const role =
         document.querySelector(
@@ -1549,33 +1729,45 @@ function changeRole() {
     ).textContent = "";
 
 
-    if (role === "admin") {
+    document.getElementById(
+        "loginMessage"
+    ).className =
+        "message";
 
+
+    if (
+        role === "admin"
+    ) {
 
         adminLogin
             .classList
-            .remove("hidden");
+            .remove(
+                "hidden"
+            );
 
 
         userLogin
             .classList
-            .add("hidden");
-
+            .add(
+                "hidden"
+            );
 
     }
 
     else {
 
-
         adminLogin
             .classList
-            .add("hidden");
+            .add(
+                "hidden"
+            );
 
 
         userLogin
             .classList
-            .remove("hidden");
-
+            .remove(
+                "hidden"
+            );
 
     }
 
@@ -1587,75 +1779,72 @@ function changeRole() {
 ===================================================== */
 
 document
-.getElementById("adminLoginForm")
-.addEventListener(
-    "submit",
-    function(event) {
+    .getElementById(
+        "adminLoginForm"
+    )
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
 
 
-        event.preventDefault();
+            const id =
+                document
+                .getElementById(
+                    "adminId"
+                )
+                .value
+                .trim();
 
 
-        const id =
-            document
-            .getElementById(
-                "adminId"
-            )
-            .value
-            .trim();
+            const password =
+                document
+                .getElementById(
+                    "adminPassword"
+                )
+                .value;
 
 
-        const password =
-            document
-            .getElementById(
-                "adminPassword"
-            )
-            .value;
+            const message =
+                document.getElementById(
+                    "loginMessage"
+                );
 
 
-        const message =
-            document.getElementById(
-                "loginMessage"
-            );
+            if (
+                id === ADMIN_ID &&
+                password === ADMIN_PASSWORD
+            ) {
+
+                message.textContent =
+                    "✅ Admin login successful.";
 
 
-        if (
-            id === ADMIN_ID &&
-            password === ADMIN_PASSWORD
-        ) {
+                message.className =
+                    "message success";
 
 
-            message.textContent =
-                "✅ Admin login successful.";
+                setTimeout(
+                    showAdminPage,
+                    400
+                );
+
+            }
+
+            else {
+
+                message.textContent =
+                    "❌ Invalid Admin ID or Password.";
 
 
-            message.className =
-                "message success";
+                message.className =
+                    "message error";
 
-
-            setTimeout(
-                showAdminPage,
-                400
-            );
-
+            }
 
         }
-
-        else {
-
-
-            message.textContent =
-                "❌ Invalid Admin ID or Password.";
-
-
-            message.className =
-                "message error";
-
-
-        }
-
-    }
-);
+    );
 
 
 /* =====================================================
@@ -1664,13 +1853,14 @@ document
 
 function openUserPage() {
 
-
     document
         .getElementById(
             "loginPage"
         )
         .classList
-        .add("hidden");
+        .add(
+            "hidden"
+        );
 
 
     document
@@ -1678,7 +1868,9 @@ function openUserPage() {
             "adminPage"
         )
         .classList
-        .add("hidden");
+        .add(
+            "hidden"
+        );
 
 
     document
@@ -1686,7 +1878,9 @@ function openUserPage() {
             "userPage"
         )
         .classList
-        .remove("hidden");
+        .remove(
+            "hidden"
+        );
 
 
     const userId =
@@ -1704,25 +1898,13 @@ function openUserPage() {
     ).textContent = "";
 
 
-    setToday();
-
-}
-
-
-/* =====================================================
-   TODAY
-===================================================== */
-
-function setToday() {
-
-
     document.getElementById(
-        "entryDate"
-    ).value =
+        "userMessage"
+    ).className =
+        "message";
 
-        new Date()
-        .toISOString()
-        .split("T")[0];
+
+    setToday();
 
 }
 
@@ -1732,206 +1914,207 @@ function setToday() {
 ===================================================== */
 
 document
-.getElementById("vehicleForm")
-.addEventListener(
-    "submit",
-    function(event) {
+    .getElementById(
+        "vehicleForm"
+    )
+    .addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
 
 
-        event.preventDefault();
+            const userId =
+                getUserId();
 
 
-        const userId =
-            getUserId();
+            /*
+               EVERY SUBMIT
+               = NEW RECORD
+            */
 
 
-        /*
-         EVERY SUBMIT = NEW RECORD
-        */
+            const record = {
+
+                recordNumber:
+                    Date.now(),
+
+                userId:
+                    userId,
+
+                vehicleName:
+                    document
+                    .getElementById(
+                        "vehicleName"
+                    )
+                    .value
+                    .trim(),
+
+                ownerName:
+                    document
+                    .getElementById(
+                        "ownerName"
+                    )
+                    .value
+                    .trim(),
+
+                vehicleAge:
+                    document
+                    .getElementById(
+                        "vehicleAge"
+                    )
+                    .value,
+
+                vehicleMileage:
+                    document
+                    .getElementById(
+                        "vehicleMileage"
+                    )
+                    .value,
+
+                vehicleKm:
+                    document
+                    .getElementById(
+                        "vehicleKm"
+                    )
+                    .value,
+
+                origin:
+                    document
+                    .getElementById(
+                        "origin"
+                    )
+                    .value
+                    .trim(),
+
+                destination:
+                    document
+                    .getElementById(
+                        "destination"
+                    )
+                    .value
+                    .trim(),
+
+                /*
+                   datetime-local is intentionally
+                   saved exactly as entered.
+
+                   Example:
+                   2026-09-14T17:30
+
+                   This prevents different phones
+                   from converting the transport time
+                   into different time zones.
+                */
+
+                startTime:
+                    document
+                    .getElementById(
+                        "startTime"
+                    )
+                    .value,
+
+                targetEndTime:
+                    document
+                    .getElementById(
+                        "targetEndTime"
+                    )
+                    .value,
+
+                driverName:
+                    document
+                    .getElementById(
+                        "driverName"
+                    )
+                    .value
+                    .trim(),
+
+                entryDate:
+                    document
+                    .getElementById(
+                        "entryDate"
+                    )
+                    .value,
+
+                /*
+                   Saved At is a true UTC timestamp.
+                   It is converted to the same display
+                   format when shown in Admin.
+                */
+
+                savedAt:
+                    new Date().toISOString()
+
+            };
 
 
-        const record = {
+            /*
+               GET OLD RECORDS
+            */
+
+            let records =
+                JSON.parse(
+                    localStorage.getItem(
+                        "vehicleRecords"
+                    )
+                ) || [];
 
 
-            recordNumber:
-                Date.now(),
+            /*
+               ALWAYS ADD NEW RECORD
+            */
 
-
-            userId:
-                userId,
-
-
-            vehicleName:
-                document
-                .getElementById(
-                    "vehicleName"
-                )
-                .value
-                .trim(),
-
-
-            ownerName:
-                document
-                .getElementById(
-                    "ownerName"
-                )
-                .value
-                .trim(),
-
-
-            vehicleAge:
-                document
-                .getElementById(
-                    "vehicleAge"
-                )
-                .value,
-
-
-            vehicleMileage:
-                document
-                .getElementById(
-                    "vehicleMileage"
-                )
-                .value,
-
-
-            vehicleKm:
-                document
-                .getElementById(
-                    "vehicleKm"
-                )
-                .value,
-
-
-            origin:
-                document
-                .getElementById(
-                    "origin"
-                )
-                .value
-                .trim(),
-
-
-            destination:
-                document
-                .getElementById(
-                    "destination"
-                )
-                .value
-                .trim(),
-
-
-            startTime:
-                document
-                .getElementById(
-                    "startTime"
-                )
-                .value,
-
-
-            targetEndTime:
-                document
-                .getElementById(
-                    "targetEndTime"
-                )
-                .value,
-
-
-            driverName:
-                document
-                .getElementById(
-                    "driverName"
-                )
-                .value
-                .trim(),
-
-
-            entryDate:
-                document
-                .getElementById(
-                    "entryDate"
-                )
-                .value,
-
-
-            savedAt:
-                new Date()
-                .toLocaleString()
-
-        };
-
-
-        /*
-         GET OLD RECORDS
-        */
-
-        let records =
-            JSON.parse(
-                localStorage.getItem(
-                    "vehicleRecords"
-                )
-            ) || [];
-
-
-        /*
-         IMPORTANT:
-
-         DO NOT UPDATE OLD RECORD.
-
-         ALWAYS ADD NEW RECORD.
-        */
-
-        records.push(
-            record
-        );
-
-
-        /*
-         SAVE ALL RECORDS
-        */
-
-        localStorage.setItem(
-            "vehicleRecords",
-            JSON.stringify(
-                records
-            )
-        );
-
-
-        /*
-         SUCCESS
-        */
-
-        const message =
-            document.getElementById(
-                "userMessage"
+            records.push(
+                record
             );
 
 
-        message.textContent =
-            "✅ New record saved successfully! Record " +
-            records.length;
+            /*
+               SAVE
+            */
+
+            localStorage.setItem(
+                "vehicleRecords",
+                JSON.stringify(
+                    records
+                )
+            );
 
 
-        message.className =
-            "message success";
+            /*
+               SUCCESS
+            */
+
+            const message =
+                document.getElementById(
+                    "userMessage"
+                );
 
 
-        /*
-         CLEAR FORM
-        */
-
-        document
-            .getElementById(
-                "vehicleForm"
-            )
-            .reset();
+            message.textContent =
+                "✅ New record saved successfully! Record " +
+                records.length;
 
 
-        setToday();
+            message.className =
+                "message success";
 
-    }
-);
+
+            /*
+               CLEAR FORM
+            */
+
+            document
+                .getElementById(
+                    "vehicleForm"
+                )
+                .reset();
+
+
+            setToday();
+
+        }
+    );
 
 
 /* =====================================================
@@ -1940,13 +2123,14 @@ document
 
 function showAdminPage() {
 
-
     document
         .getElementById(
             "loginPage"
         )
         .classList
-        .add("hidden");
+        .add(
+            "hidden"
+        );
 
 
     document
@@ -1954,7 +2138,9 @@ function showAdminPage() {
             "userPage"
         )
         .classList
-        .add("hidden");
+        .add(
+            "hidden"
+        );
 
 
     document
@@ -1962,7 +2148,9 @@ function showAdminPage() {
             "adminPage"
         )
         .classList
-        .remove("hidden");
+        .remove(
+            "hidden"
+        );
 
 
     loadRecords();
@@ -1975,7 +2163,6 @@ function showAdminPage() {
 ===================================================== */
 
 function loadRecords() {
-
 
     const container =
         document.getElementById(
@@ -2007,7 +2194,6 @@ function loadRecords() {
         records.length === 0
     ) {
 
-
         container.innerHTML = `
 
             <div class="record">
@@ -2037,13 +2223,10 @@ function loadRecords() {
 
     /*
        DISPLAY EVERY RECORD
-       ONE BY ONE
     */
-
 
     records.forEach(
         function(record, index) {
-
 
             const div =
                 document.createElement(
@@ -2175,7 +2358,9 @@ function loadRecords() {
                     </strong>
 
                     ${escapeHTML(
-                        record.startTime
+                        formatTransportTime(
+                            record.startTime
+                        )
                     )}
 
                 </div>
@@ -2188,7 +2373,9 @@ function loadRecords() {
                     </strong>
 
                     ${escapeHTML(
-                        record.targetEndTime
+                        formatTransportTime(
+                            record.targetEndTime
+                        )
                     )}
 
                 </div>
@@ -2214,7 +2401,9 @@ function loadRecords() {
                     </strong>
 
                     ${escapeHTML(
-                        record.entryDate
+                        formatEntryDate(
+                            record.entryDate
+                        )
                     )}
 
                 </div>
@@ -2227,7 +2416,9 @@ function loadRecords() {
                     </strong>
 
                     ${escapeHTML(
-                        record.savedAt
+                        formatDateTime(
+                            record.savedAt
+                        )
                     )}
 
                 </div>
@@ -2245,7 +2436,9 @@ function loadRecords() {
                         </strong>
 
                         ${escapeHTML(
-                            record.updatedAt
+                            formatDateTime(
+                                record.updatedAt
+                            )
                         )}
 
                     </div>
@@ -2286,8 +2479,227 @@ function loadRecords() {
                 div
             );
 
-
         }
+    );
+
+}
+
+
+/* =====================================================
+   TRANSPORT TIME FORMAT
+   TIME IS NOT CONVERTED BETWEEN TIME ZONES
+
+   Input:
+   2026-09-14T17:30
+
+   Output:
+   14 Sep 2026, 05:30 PM
+===================================================== */
+
+function formatTransportTime(value) {
+
+    if (!value) {
+
+        return "";
+
+    }
+
+
+    /*
+       datetime-local values have no timezone.
+
+       We manually split the value instead of
+       using new Date(value).
+
+       This guarantees that:
+
+       17:30
+
+       remains
+
+       05:30 PM
+
+       on every device.
+    */
+
+    const match =
+        String(value).match(
+            /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/
+        );
+
+
+    if (!match) {
+
+        return value;
+
+    }
+
+
+    const year =
+        match[1];
+
+
+    const monthNumber =
+        Number(
+            match[2]
+        );
+
+
+    const day =
+        match[3];
+
+
+    let hours =
+        Number(
+            match[4]
+        );
+
+
+    const minutes =
+        match[5];
+
+
+    const monthNames = [
+
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+
+    ];
+
+
+    const month =
+        monthNames[
+            monthNumber - 1
+        ];
+
+
+    const ampm =
+        hours >= 12
+            ? "PM"
+            : "AM";
+
+
+    hours =
+        hours % 12;
+
+
+    if (
+        hours === 0
+    ) {
+
+        hours = 12;
+
+    }
+
+
+    const displayHours =
+        String(
+            hours
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+
+        day +
+        " " +
+        month +
+        " " +
+        year +
+        ", " +
+        displayHours +
+        ":" +
+        minutes +
+        " " +
+        ampm
+
+    );
+
+}
+
+
+/* =====================================================
+   ENTRY DATE FORMAT
+===================================================== */
+
+function formatEntryDate(value) {
+
+    if (!value) {
+
+        return "";
+
+    }
+
+
+    const match =
+        String(value).match(
+            /^(\d{4})-(\d{2})-(\d{2})$/
+        );
+
+
+    if (!match) {
+
+        return value;
+
+    }
+
+
+    const year =
+        match[1];
+
+
+    const monthNumber =
+        Number(
+            match[2]
+        );
+
+
+    const day =
+        match[3];
+
+
+    const monthNames = [
+
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+
+    ];
+
+
+    const month =
+        monthNames[
+            monthNumber - 1
+        ];
+
+
+    return (
+        day +
+        " " +
+        month +
+        " " +
+        year
     );
 
 }
@@ -2298,7 +2710,6 @@ function loadRecords() {
 ===================================================== */
 
 function editRecord(index) {
-
 
     const records =
         JSON.parse(
@@ -2325,6 +2736,7 @@ function editRecord(index) {
             record.vehicleName || ""
         );
 
+
     if (
         vehicleName === null
     ) return;
@@ -2335,6 +2747,7 @@ function editRecord(index) {
             "Owner Name:",
             record.ownerName || ""
         );
+
 
     if (
         ownerName === null
@@ -2347,6 +2760,7 @@ function editRecord(index) {
             record.vehicleAge || ""
         );
 
+
     if (
         vehicleAge === null
     ) return;
@@ -2357,6 +2771,7 @@ function editRecord(index) {
             "Vehicle Mileage:",
             record.vehicleMileage || ""
         );
+
 
     if (
         vehicleMileage === null
@@ -2369,6 +2784,7 @@ function editRecord(index) {
             record.vehicleKm || ""
         );
 
+
     if (
         vehicleKm === null
     ) return;
@@ -2379,6 +2795,7 @@ function editRecord(index) {
             "Origin:",
             record.origin || ""
         );
+
 
     if (
         origin === null
@@ -2391,6 +2808,7 @@ function editRecord(index) {
             record.destination || ""
         );
 
+
     if (
         destination === null
     ) return;
@@ -2398,9 +2816,10 @@ function editRecord(index) {
 
     const startTime =
         prompt(
-            "Vehicle Start Time:",
+            "Vehicle Start Time (YYYY-MM-DDTHH:MM):",
             record.startTime || ""
         );
+
 
     if (
         startTime === null
@@ -2409,9 +2828,10 @@ function editRecord(index) {
 
     const targetEndTime =
         prompt(
-            "Target End Time:",
+            "Target End Time (YYYY-MM-DDTHH:MM):",
             record.targetEndTime || ""
         );
+
 
     if (
         targetEndTime === null
@@ -2424,6 +2844,7 @@ function editRecord(index) {
             record.driverName || ""
         );
 
+
     if (
         driverName === null
     ) return;
@@ -2431,9 +2852,10 @@ function editRecord(index) {
 
     const entryDate =
         prompt(
-            "Entry Date:",
+            "Entry Date (YYYY-MM-DD):",
             record.entryDate || ""
         );
+
 
     if (
         entryDate === null
@@ -2468,6 +2890,10 @@ function editRecord(index) {
         destination.trim();
 
 
+    /*
+       Keep transport times timezone-independent.
+    */
+
     record.startTime =
         startTime;
 
@@ -2484,9 +2910,12 @@ function editRecord(index) {
         entryDate;
 
 
+    /*
+       Store update time as ISO.
+    */
+
     record.updatedAt =
-        new Date()
-        .toLocaleString();
+        new Date().toISOString();
 
 
     localStorage.setItem(
@@ -2513,7 +2942,6 @@ function editRecord(index) {
 
 function deleteRecord(index) {
 
-
     const records =
         JSON.parse(
             localStorage.getItem(
@@ -2522,7 +2950,9 @@ function deleteRecord(index) {
         ) || [];
 
 
-    if (!records[index]) {
+    if (
+        !records[index]
+    ) {
 
         return;
 
@@ -2574,7 +3004,6 @@ function deleteRecord(index) {
 
 function escapeHTML(value) {
 
-
     if (
         value === null ||
         value === undefined
@@ -2621,13 +3050,14 @@ function escapeHTML(value) {
 
 function logout() {
 
-
     document
         .getElementById(
             "userPage"
         )
         .classList
-        .add("hidden");
+        .add(
+            "hidden"
+        );
 
 
     document
@@ -2635,7 +3065,9 @@ function logout() {
             "adminPage"
         )
         .classList
-        .add("hidden");
+        .add(
+            "hidden"
+        );
 
 
     document
@@ -2643,7 +3075,9 @@ function logout() {
             "loginPage"
         )
         .classList
-        .remove("hidden");
+        .remove(
+            "hidden"
+        );
 
 
     document
