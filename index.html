@@ -22,6 +22,12 @@
     padding: 0;
 }
 
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
 body {
 
     font-family:
@@ -29,13 +35,7 @@ body {
         Helvetica,
         sans-serif;
 
-    background:
-        linear-gradient(
-            135deg,
-            #dbeafe,
-            #f8fafc,
-            #dbeafe
-        );
+    background: #000;
 
     min-height: 100vh;
 
@@ -43,11 +43,62 @@ body {
 
     overflow-x: hidden;
 
+    position: relative;
+
 }
 
 
 /* =====================================================
-   ANIMATED BACKGROUND
+   FULL SCREEN VIDEO BACKGROUND
+===================================================== */
+
+.transport-video {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    z-index: -10;
+
+    pointer-events: none;
+
+}
+
+
+/* =====================================================
+   VIDEO DARK / GLASS OVERLAY
+===================================================== */
+
+.video-overlay {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background:
+        rgba(0, 0, 0, 0.35);
+
+    z-index: -9;
+
+    pointer-events: none;
+
+}
+
+
+/* =====================================================
+   ANIMATED BACKGROUND TRUCKS
 ===================================================== */
 
 .background-trucks {
@@ -64,10 +115,9 @@ body {
 
     overflow: hidden;
 
-    z-index: -1;
+    z-index: -8;
 
 }
-
 
 .truck {
 
@@ -84,7 +134,6 @@ body {
 
 }
 
-
 .truck:nth-child(1) {
 
     top: 10%;
@@ -94,7 +143,6 @@ body {
     font-size: 60px;
 
 }
-
 
 .truck:nth-child(2) {
 
@@ -108,7 +156,6 @@ body {
 
 }
 
-
 .truck:nth-child(3) {
 
     top: 55%;
@@ -121,7 +168,6 @@ body {
 
 }
 
-
 .truck:nth-child(4) {
 
     top: 75%;
@@ -133,7 +179,6 @@ body {
     font-size: 50px;
 
 }
-
 
 @keyframes drive {
 
@@ -157,10 +202,12 @@ body {
 
 
 /* =====================================================
-   MAIN CONTAINER
+   MAIN CONTAINERS
 ===================================================== */
 
-.container {
+#loginPage,
+#userPage,
+#adminPage {
 
     width: 850px;
 
@@ -173,7 +220,7 @@ body {
             255,
             255,
             255,
-            0.96
+            0.94
         );
 
     padding: 30px;
@@ -186,17 +233,20 @@ body {
             0,
             0,
             0,
-            0.18
+            0.30
         );
 
     border:
         1px solid
         rgba(
-            37,
-            99,
-            235,
-            0.15
+            255,
+            255,
+            255,
+            0.7
         );
+
+    backdrop-filter:
+        blur(5px);
 
 }
 
@@ -221,7 +271,6 @@ body {
         titleGlow 2s ease-in-out infinite;
 
 }
-
 
 @keyframes titleGlow {
 
@@ -288,7 +337,7 @@ body {
 
 
 /* =====================================================
-   CARTOON TRUCK HEADER
+   CARTOON TRUCK
 ===================================================== */
 
 .cartoon-truck {
@@ -300,12 +349,10 @@ body {
     margin-bottom: 10px;
 
     animation:
-
         bounceTruck
         2s ease-in-out infinite;
 
 }
-
 
 @keyframes bounceTruck {
 
@@ -343,7 +390,6 @@ h2 {
 
 }
 
-
 h3 {
 
     color: #1d4ed8;
@@ -371,7 +417,6 @@ h3 {
 
 }
 
-
 label {
 
     display: block;
@@ -383,7 +428,6 @@ label {
     color: #334155;
 
 }
-
 
 input {
 
@@ -401,11 +445,9 @@ input {
 
     background: #fff;
 
-    transition:
-        0.25s;
+    transition: 0.25s;
 
 }
-
 
 input:focus {
 
@@ -460,8 +502,7 @@ button {
 
     margin-top: 10px;
 
-    transition:
-        0.25s;
+    transition: 0.25s;
 
     box-shadow:
         0 4px 10px
@@ -473,7 +514,6 @@ button {
         );
 
 }
-
 
 button:hover {
 
@@ -491,7 +531,6 @@ button:hover {
 
 }
 
-
 .admin-btn {
 
     background:
@@ -502,7 +541,6 @@ button:hover {
         );
 
 }
-
 
 .user-btn {
 
@@ -515,7 +553,6 @@ button:hover {
 
 }
 
-
 .logout {
 
     background:
@@ -527,7 +564,6 @@ button:hover {
 
 }
 
-
 .edit-btn {
 
     background:
@@ -538,7 +574,6 @@ button:hover {
         );
 
 }
-
 
 .delete-btn {
 
@@ -558,7 +593,7 @@ button:hover {
 
 .hidden {
 
-    display: none;
+    display: none !important;
 
 }
 
@@ -579,7 +614,6 @@ button:hover {
 
 }
 
-
 .success {
 
     background: #dcfce7;
@@ -588,7 +622,6 @@ button:hover {
 
 }
 
-
 .error {
 
     background: #fee2e2;
@@ -596,7 +629,6 @@ button:hover {
     color: #991b1b;
 
 }
-
 
 .info {
 
@@ -621,7 +653,6 @@ button:hover {
 
 }
 
-
 .role-option {
 
     flex: 1;
@@ -642,11 +673,9 @@ button:hover {
 
     background: #f8fafc;
 
-    transition:
-        0.25s;
+    transition: 0.25s;
 
 }
-
 
 .role-option:hover {
 
@@ -660,7 +689,6 @@ button:hover {
         translateY(-2px);
 
 }
-
 
 .role-option input {
 
@@ -781,15 +809,13 @@ button:hover {
             0.08
         );
 
-    transition:
-        0.25s;
+    transition: 0.25s;
 
     animation:
         recordAppear
         0.5s ease;
 
 }
-
 
 .record:hover {
 
@@ -806,7 +832,6 @@ button:hover {
         );
 
 }
-
 
 @keyframes recordAppear {
 
@@ -832,7 +857,7 @@ button:hover {
 
 
 /* =====================================================
-   RECORD HEADER
+   RECORD
 ===================================================== */
 
 .record-title {
@@ -854,7 +879,6 @@ button:hover {
 
 }
 
-
 .record-row {
 
     padding: 10px 0;
@@ -867,7 +891,6 @@ button:hover {
 
 }
 
-
 .record-row strong {
 
     display: inline-block;
@@ -877,7 +900,6 @@ button:hover {
     color: #334155;
 
 }
-
 
 .admin-actions {
 
@@ -892,7 +914,15 @@ button:hover {
 
 @media (max-width: 600px) {
 
-    .container {
+    body {
+
+        padding: 10px;
+
+    }
+
+    #loginPage,
+    #userPage,
+    #adminPage {
 
         padding: 20px;
 
@@ -901,20 +931,17 @@ button:hover {
 
     }
 
-
     .main-title {
 
         font-size: 23px;
 
     }
 
-
     .cartoon-truck {
 
         font-size: 55px;
 
     }
-
 
     .role-box {
 
@@ -923,7 +950,6 @@ button:hover {
 
     }
 
-
     .record-row strong {
 
         display: block;
@@ -931,6 +957,29 @@ button:hover {
         width: 100%;
 
         margin-bottom: 3px;
+
+    }
+
+}
+
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .transport-video {
+
+        animation: none;
+
+    }
+
+    .cartoon-truck,
+    .main-title,
+    .record {
+
+        animation: none;
 
     }
 
@@ -945,23 +994,31 @@ button:hover {
 
 
 <!-- =====================================================
-     BACKGROUND TRUCKS
+     FULL SCREEN TRUCK VIDEO BACKGROUND
 ===================================================== -->
 
-<div class="background-trucks">
+<video
+    id="transportVideo"
+    class="transport-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+>
 
-    <div class="truck">🚛</div>
+    <source
+        src="truck-video.mp4"
+        type="video/mp4"
+    >
 
-    <div class="truck">🚚</div>
+    Your browser does not support
+    background video.
 
-    <div class="truck">🚛</div>
-
-    <div class="truck">🚚</div>
-
-</div>
+</video>
 
 
-<div class="container">
+<div class="video-overlay"></div>
 
 
 <!-- =====================================================
@@ -977,16 +1034,12 @@ button:hover {
 
 
     <h1 class="main-title">
-
         Ponnar Sankar Pranav Transport
-
     </h1>
 
 
     <p class="subtitle">
-
         🚚 Safe • Reliable • Smart Transport 🚚
-
     </p>
 
 
@@ -1036,7 +1089,6 @@ button:hover {
 
         <form id="adminLoginForm">
 
-
             <div class="form-group">
 
                 <label>
@@ -1077,17 +1129,17 @@ button:hover {
 
             </button>
 
-
         </form>
 
     </div>
 
 
-    <!-- USER -->
+    <!-- USER LOGIN -->
 
-    <div id="userLogin"
-         class="hidden">
-
+    <div
+        id="userLogin"
+        class="hidden"
+    >
 
         <div class="message info">
 
@@ -1110,15 +1162,13 @@ button:hover {
 
         </button>
 
-
     </div>
 
 
     <div
         id="loginMessage"
-        class="message">
-
-    </div>
+        class="message"
+    ></div>
 
 
 </div>
@@ -1129,8 +1179,10 @@ button:hover {
      USER PAGE
 ===================================================== -->
 
-<div id="userPage"
-     class="hidden">
+<div
+    id="userPage"
+    class="hidden"
+>
 
 
     <div class="cartoon-truck">
@@ -1139,9 +1191,7 @@ button:hover {
 
 
     <h1 class="main-title">
-
         Ponnar Sankar Pranav Transport
-
     </h1>
 
 
@@ -1374,9 +1424,8 @@ button:hover {
 
     <div
         id="userMessage"
-        class="message">
-
-    </div>
+        class="message"
+    ></div>
 
 
     <button
@@ -1396,8 +1445,10 @@ button:hover {
      ADMIN PAGE
 ===================================================== -->
 
-<div id="adminPage"
-     class="hidden">
+<div
+    id="adminPage"
+    class="hidden"
+>
 
 
     <div class="cartoon-truck">
@@ -1406,16 +1457,12 @@ button:hover {
 
 
     <h1 class="main-title">
-
         Ponnar Sankar Pranav Transport
-
     </h1>
 
 
     <h2>
-
         Admin Dashboard
-
     </h2>
 
 
@@ -1432,18 +1479,14 @@ button:hover {
 
     <div
         id="recordCount"
-        class="record-count">
-
-    </div>
-
-
-    <div id="recordsContainer">
-
-    </div>
+        class="record-count"
+    ></div>
 
 
-    <button
-        onclick="loadRecords()">
+    <div id="recordsContainer"></div>
+
+
+    <button onclick="loadRecords()">
 
         🔄 Refresh All Records
 
@@ -1462,22 +1505,16 @@ button:hover {
 </div>
 
 
-</div>
-
-
 
 <script>
-
 
 /* =====================================================
    ADMIN LOGIN
 ===================================================== */
 
-const ADMIN_ID =
-    "kesavan";
+const ADMIN_ID = "kesavan";
 
-const ADMIN_PASSWORD =
-    "12345678";
+const ADMIN_PASSWORD = "12345678";
 
 
 /* =====================================================
@@ -1491,7 +1528,6 @@ function getUserId() {
             "transportUserId"
         );
 
-
     if (!userId) {
 
         userId =
@@ -1502,7 +1538,6 @@ function getUserId() {
                 Math.random() * 10000
             );
 
-
         localStorage.setItem(
             "transportUserId",
             userId
@@ -1510,168 +1545,31 @@ function getUserId() {
 
     }
 
-
     return userId;
 
 }
 
 
 /* =====================================================
-   STANDARD DATE/TIME FORMAT
-   SAME DISPLAY FORMAT ON EVERY DEVICE
-===================================================== */
-
-function formatDateTime(value) {
-
-    if (!value) {
-
-        return "";
-
-    }
-
-
-    const date =
-        new Date(value);
-
-
-    if (
-        isNaN(
-            date.getTime()
-        )
-    ) {
-
-        return value;
-
-    }
-
-
-    const day =
-        String(
-            date.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
-
-
-    const monthNames = [
-
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-
-    ];
-
-
-    const month =
-        monthNames[
-            date.getMonth()
-        ];
-
-
-    const year =
-        date.getFullYear();
-
-
-    let hours =
-        date.getHours();
-
-
-    const minutes =
-        String(
-            date.getMinutes()
-        ).padStart(
-            2,
-            "0"
-        );
-
-
-    const ampm =
-        hours >= 12
-            ? "PM"
-            : "AM";
-
-
-    hours =
-        hours % 12;
-
-
-    if (
-        hours === 0
-    ) {
-
-        hours = 12;
-
-    }
-
-
-    hours =
-        String(
-            hours
-        ).padStart(
-            2,
-            "0"
-        );
-
-
-    return (
-        day +
-        " " +
-        month +
-        " " +
-        year +
-        ", " +
-        hours +
-        ":" +
-        minutes +
-        " " +
-        ampm
-    );
-
-}
-
-
-/* =====================================================
    LOCAL DATE
-   PREVENTS UTC DATE SHIFT
 ===================================================== */
 
 function getLocalDate() {
 
-    const now =
-        new Date();
-
+    const now = new Date();
 
     const year =
         now.getFullYear();
 
-
     const month =
         String(
             now.getMonth() + 1
-        ).padStart(
-            2,
-            "0"
-        );
-
+        ).padStart(2, "0");
 
     const day =
         String(
             now.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
-
+        ).padStart(2, "0");
 
     return (
         year +
@@ -1684,24 +1582,18 @@ function getLocalDate() {
 }
 
 
-/* =====================================================
-   TODAY
-===================================================== */
-
 function setToday() {
 
     document
-        .getElementById(
-            "entryDate"
-        )
+        .getElementById("entryDate")
         .value =
-            getLocalDate();
+        getLocalDate();
 
 }
 
 
 /* =====================================================
-   CHANGE ROLE
+   ROLE
 ===================================================== */
 
 function changeRole() {
@@ -1711,46 +1603,35 @@ function changeRole() {
             'input[name="role"]:checked'
         ).value;
 
-
     const adminLogin =
         document.getElementById(
             "adminLogin"
         );
-
 
     const userLogin =
         document.getElementById(
             "userLogin"
         );
 
+    const message =
+        document.getElementById(
+            "loginMessage"
+        );
 
-    document.getElementById(
-        "loginMessage"
-    ).textContent = "";
+    message.textContent = "";
 
-
-    document.getElementById(
-        "loginMessage"
-    ).className =
+    message.className =
         "message";
 
-
-    if (
-        role === "admin"
-    ) {
+    if (role === "admin") {
 
         adminLogin
             .classList
-            .remove(
-                "hidden"
-            );
-
+            .remove("hidden");
 
         userLogin
             .classList
-            .add(
-                "hidden"
-            );
+            .add("hidden");
 
     }
 
@@ -1758,16 +1639,11 @@ function changeRole() {
 
         adminLogin
             .classList
-            .add(
-                "hidden"
-            );
-
+            .add("hidden");
 
         userLogin
             .classList
-            .remove(
-                "hidden"
-            );
+            .remove("hidden");
 
     }
 
@@ -1779,15 +1655,12 @@ function changeRole() {
 ===================================================== */
 
 document
-    .getElementById(
-        "adminLoginForm"
-    )
+    .getElementById("adminLoginForm")
     .addEventListener(
         "submit",
         function(event) {
 
             event.preventDefault();
-
 
             const id =
                 document
@@ -1797,7 +1670,6 @@ document
                 .value
                 .trim();
 
-
             const password =
                 document
                 .getElementById(
@@ -1805,12 +1677,10 @@ document
                 )
                 .value;
 
-
             const message =
                 document.getElementById(
                     "loginMessage"
                 );
-
 
             if (
                 id === ADMIN_ID &&
@@ -1820,10 +1690,8 @@ document
                 message.textContent =
                     "✅ Admin login successful.";
 
-
                 message.className =
                     "message success";
-
 
                 setTimeout(
                     showAdminPage,
@@ -1837,7 +1705,6 @@ document
                 message.textContent =
                     "❌ Invalid Admin ID or Password.";
 
-
                 message.className =
                     "message error";
 
@@ -1848,61 +1715,42 @@ document
 
 
 /* =====================================================
-   OPEN USER PAGE
+   USER PAGE
 ===================================================== */
 
 function openUserPage() {
 
     document
-        .getElementById(
-            "loginPage"
-        )
+        .getElementById("loginPage")
         .classList
-        .add(
-            "hidden"
-        );
-
+        .add("hidden");
 
     document
-        .getElementById(
-            "adminPage"
-        )
+        .getElementById("adminPage")
         .classList
-        .add(
-            "hidden"
-        );
-
+        .add("hidden");
 
     document
-        .getElementById(
-            "userPage"
-        )
+        .getElementById("userPage")
         .classList
-        .remove(
-            "hidden"
-        );
-
+        .remove("hidden");
 
     const userId =
         getUserId();
-
 
     document.getElementById(
         "currentUserId"
     ).textContent =
         userId;
 
-
     document.getElementById(
         "userMessage"
     ).textContent = "";
-
 
     document.getElementById(
         "userMessage"
     ).className =
         "message";
-
 
     setToday();
 
@@ -1910,29 +1758,19 @@ function openUserPage() {
 
 
 /* =====================================================
-   USER SUBMIT NEW RECORD
+   SUBMIT RECORD
 ===================================================== */
 
 document
-    .getElementById(
-        "vehicleForm"
-    )
+    .getElementById("vehicleForm")
     .addEventListener(
         "submit",
         function(event) {
 
             event.preventDefault();
 
-
             const userId =
                 getUserId();
-
-
-            /*
-               EVERY SUBMIT
-               = NEW RECORD
-            */
-
 
             const record = {
 
@@ -1995,18 +1833,6 @@ document
                     .value
                     .trim(),
 
-                /*
-                   datetime-local is intentionally
-                   saved exactly as entered.
-
-                   Example:
-                   2026-09-14T17:30
-
-                   This prevents different phones
-                   from converting the transport time
-                   into different time zones.
-                */
-
                 startTime:
                     document
                     .getElementById(
@@ -2036,21 +1862,11 @@ document
                     )
                     .value,
 
-                /*
-                   Saved At is a true UTC timestamp.
-                   It is converted to the same display
-                   format when shown in Admin.
-                */
-
                 savedAt:
                     new Date().toISOString()
 
             };
 
-
-            /*
-               GET OLD RECORDS
-            */
 
             let records =
                 JSON.parse(
@@ -2060,56 +1876,33 @@ document
                 ) || [];
 
 
-            /*
-               ALWAYS ADD NEW RECORD
-            */
+            records.push(record);
 
-            records.push(
-                record
-            );
-
-
-            /*
-               SAVE
-            */
 
             localStorage.setItem(
                 "vehicleRecords",
-                JSON.stringify(
-                    records
-                )
+                JSON.stringify(records)
             );
 
-
-            /*
-               SUCCESS
-            */
 
             const message =
                 document.getElementById(
                     "userMessage"
                 );
 
-
             message.textContent =
                 "✅ New record saved successfully! Record " +
                 records.length;
 
-
             message.className =
                 "message success";
 
-
-            /*
-               CLEAR FORM
-            */
 
             document
                 .getElementById(
                     "vehicleForm"
                 )
                 .reset();
-
 
             setToday();
 
@@ -2124,34 +1917,19 @@ document
 function showAdminPage() {
 
     document
-        .getElementById(
-            "loginPage"
-        )
+        .getElementById("loginPage")
         .classList
-        .add(
-            "hidden"
-        );
-
+        .add("hidden");
 
     document
-        .getElementById(
-            "userPage"
-        )
+        .getElementById("userPage")
         .classList
-        .add(
-            "hidden"
-        );
-
+        .add("hidden");
 
     document
-        .getElementById(
-            "adminPage"
-        )
+        .getElementById("adminPage")
         .classList
-        .remove(
-            "hidden"
-        );
-
+        .remove("hidden");
 
     loadRecords();
 
@@ -2159,460 +1937,59 @@ function showAdminPage() {
 
 
 /* =====================================================
-   LOAD ALL RECORDS
-===================================================== */
-
-function loadRecords() {
-
-    const container =
-        document.getElementById(
-            "recordsContainer"
-        );
-
-
-    const records =
-        JSON.parse(
-            localStorage.getItem(
-                "vehicleRecords"
-            )
-        ) || [];
-
-
-    container.innerHTML =
-        "";
-
-
-    document.getElementById(
-        "recordCount"
-    ).textContent =
-
-        "📋 Total Records: " +
-        records.length;
-
-
-    if (
-        records.length === 0
-    ) {
-
-        container.innerHTML = `
-
-            <div class="record">
-
-                <div class="record-title">
-
-                    🚛 No Records
-
-                </div>
-
-                <p>
-
-                    No vehicle information
-                    has been submitted yet.
-
-                </p>
-
-            </div>
-
-        `;
-
-
-        return;
-
-    }
-
-
-    /*
-       DISPLAY EVERY RECORD
-    */
-
-    records.forEach(
-        function(record, index) {
-
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-
-            div.className =
-                "record";
-
-
-            div.innerHTML = `
-
-                <div class="record-title">
-
-                    🚛 Record ${index + 1}
-
-                </div>
-
-
-                <div class="record-row">
-
-                    <strong>
-                        👤 User ID:
-                    </strong>
-
-                    ${escapeHTML(
-                        record.userId
-                    )}
-
-                </div>
-
-
-                <div class="record-row">
-
-                    <strong>
-                        🚚 Vehicle Name:
-                    </strong>
-
-                    ${escapeHTML(
-                        record.vehicleName
-                    )}
-
-                </div>
-
-
-                <div class="record-row">
-
-                    <strong>
-                        👤 Owner Name:
-                    </strong>
-
-                    ${escapeHTML(
-                        record.ownerName
-                    )}
-
-                </div>
-
-
-                <div class="record-row">
-
-                    <strong>
-                        📅 Vehicle Age:
-                    </strong>
-
-                    ${escapeHTML(
-                        record.vehicleAge
-                    )}
-
-                </div>
-
-
-                <div class="record-row">
-
-                    <strong>
-                        ⛽ Vehicle Mileage:
-                    </strong>
-
-                    ${escapeHTML(
-                        record.vehicleMileage
-                    )}
-
-                </div>
-
-
-                <div class="record-row">
-
-                    <strong>
-                        🛣️ Vehicle KM:
-                    </strong>
-
-                    ${escapeHTML(
-                        record.vehicleKm
-                    )}
-
-                </div>
-
-
-                <div class="record-row">
-
-                    <strong>
-                        📍 Origin:
-                    </strong>
-
-                    ${escapeHTML(
-                        record.origin
-                    )}
-
-                </div>
-
-
-                <div class="record-row">
-
-                    <strong>
-                        🏁 Destination:
-                    </strong>
-
-                    ${escapeHTML(
-                        record.destination
-                    )}
-
-                </div>
-
-
-                <div class="record-row">
-
-                    <strong>
-                        🕐 Start Time:
-                    </strong>
-
-                    ${escapeHTML(
-                        formatTransportTime(
-                            record.startTime
-                        )
-                    )}
-
-                </div>
-
-
-                <div class="record-row">
-
-                    <strong>
-                        🕐 Target End Time:
-                    </strong>
-
-                    ${escapeHTML(
-                        formatTransportTime(
-                            record.targetEndTime
-                        )
-                    )}
-
-                </div>
-
-
-                <div class="record-row">
-
-                    <strong>
-                        👨‍✈️ Driver Name:
-                    </strong>
-
-                    ${escapeHTML(
-                        record.driverName
-                    )}
-
-                </div>
-
-
-                <div class="record-row">
-
-                    <strong>
-                        📅 Entry Date:
-                    </strong>
-
-                    ${escapeHTML(
-                        formatEntryDate(
-                            record.entryDate
-                        )
-                    )}
-
-                </div>
-
-
-                <div class="record-row">
-
-                    <strong>
-                        💾 Saved At:
-                    </strong>
-
-                    ${escapeHTML(
-                        formatDateTime(
-                            record.savedAt
-                        )
-                    )}
-
-                </div>
-
-
-                ${
-                    record.updatedAt
-                    ?
-                    `
-
-                    <div class="record-row">
-
-                        <strong>
-                            ✏️ Updated At:
-                        </strong>
-
-                        ${escapeHTML(
-                            formatDateTime(
-                                record.updatedAt
-                            )
-                        )}
-
-                    </div>
-
-                    `
-                    :
-                    ""
-                }
-
-
-                <div class="admin-actions">
-
-
-                    <button
-                        class="edit-btn"
-                        onclick="editRecord(${index})">
-
-                        ✏️ Update This Record
-
-                    </button>
-
-
-                    <button
-                        class="delete-btn"
-                        onclick="deleteRecord(${index})">
-
-                        🗑️ Delete This Record
-
-                    </button>
-
-
-                </div>
-
-            `;
-
-
-            container.appendChild(
-                div
-            );
-
-        }
-    );
-
-}
-
-
-/* =====================================================
-   TRANSPORT TIME FORMAT
-   TIME IS NOT CONVERTED BETWEEN TIME ZONES
-
-   Input:
-   2026-09-14T17:30
-
-   Output:
-   14 Sep 2026, 05:30 PM
+   FORMAT TRANSPORT TIME
 ===================================================== */
 
 function formatTransportTime(value) {
 
-    if (!value) {
-
-        return "";
-
-    }
-
-
-    /*
-       datetime-local values have no timezone.
-
-       We manually split the value instead of
-       using new Date(value).
-
-       This guarantees that:
-
-       17:30
-
-       remains
-
-       05:30 PM
-
-       on every device.
-    */
+    if (!value) return "";
 
     const match =
         String(value).match(
             /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/
         );
 
+    if (!match) return value;
 
-    if (!match) {
-
-        return value;
-
-    }
-
-
-    const year =
-        match[1];
-
+    const year = match[1];
 
     const monthNumber =
-        Number(
-            match[2]
-        );
+        Number(match[2]);
 
-
-    const day =
-        match[3];
-
+    const day = match[3];
 
     let hours =
-        Number(
-            match[4]
-        );
+        Number(match[4]);
 
-
-    const minutes =
-        match[5];
-
+    const minutes = match[5];
 
     const monthNames = [
-
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-
+        "Jan","Feb","Mar","Apr",
+        "May","Jun","Jul","Aug",
+        "Sep","Oct","Nov","Dec"
     ];
-
 
     const month =
         monthNames[
             monthNumber - 1
         ];
 
-
     const ampm =
         hours >= 12
             ? "PM"
             : "AM";
 
-
     hours =
         hours % 12;
 
-
-    if (
-        hours === 0
-    ) {
-
+    if (hours === 0)
         hours = 12;
 
-    }
-
-
     const displayHours =
-        String(
-            hours
-        ).padStart(
-            2,
-            "0"
-        );
-
+        String(hours)
+        .padStart(2, "0");
 
     return (
-
         day +
         " " +
         month +
@@ -2624,75 +2001,43 @@ function formatTransportTime(value) {
         minutes +
         " " +
         ampm
-
     );
 
 }
 
 
 /* =====================================================
-   ENTRY DATE FORMAT
+   ENTRY DATE
 ===================================================== */
 
 function formatEntryDate(value) {
 
-    if (!value) {
-
-        return "";
-
-    }
-
+    if (!value) return "";
 
     const match =
         String(value).match(
             /^(\d{4})-(\d{2})-(\d{2})$/
         );
 
+    if (!match) return value;
 
-    if (!match) {
-
-        return value;
-
-    }
-
-
-    const year =
-        match[1];
-
+    const year = match[1];
 
     const monthNumber =
-        Number(
-            match[2]
-        );
+        Number(match[2]);
 
-
-    const day =
-        match[3];
-
+    const day = match[3];
 
     const monthNames = [
-
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-
+        "Jan","Feb","Mar","Apr",
+        "May","Jun","Jul","Aug",
+        "Sep","Oct","Nov","Dec"
     ];
-
 
     const month =
         monthNames[
             monthNumber - 1
         ];
-
 
     return (
         day +
@@ -2706,7 +2051,283 @@ function formatEntryDate(value) {
 
 
 /* =====================================================
-   ADMIN UPDATE
+   DATE/TIME
+===================================================== */
+
+function formatDateTime(value) {
+
+    if (!value) return "";
+
+    const date =
+        new Date(value);
+
+    if (
+        isNaN(
+            date.getTime()
+        )
+    )
+        return value;
+
+    const day =
+        String(
+            date.getDate()
+        ).padStart(2, "0");
+
+    const monthNames = [
+        "Jan","Feb","Mar","Apr",
+        "May","Jun","Jul","Aug",
+        "Sep","Oct","Nov","Dec"
+    ];
+
+    const month =
+        monthNames[
+            date.getMonth()
+        ];
+
+    const year =
+        date.getFullYear();
+
+    let hours =
+        date.getHours();
+
+    const minutes =
+        String(
+            date.getMinutes()
+        ).padStart(2, "0");
+
+    const ampm =
+        hours >= 12
+            ? "PM"
+            : "AM";
+
+    hours =
+        hours % 12;
+
+    if (hours === 0)
+        hours = 12;
+
+    hours =
+        String(hours)
+        .padStart(2, "0");
+
+    return (
+        day +
+        " " +
+        month +
+        " " +
+        year +
+        ", " +
+        hours +
+        ":" +
+        minutes +
+        " " +
+        ampm
+    );
+
+}
+
+
+/* =====================================================
+   LOAD RECORDS
+===================================================== */
+
+function loadRecords() {
+
+    const container =
+        document.getElementById(
+            "recordsContainer"
+        );
+
+    const records =
+        JSON.parse(
+            localStorage.getItem(
+                "vehicleRecords"
+            )
+        ) || [];
+
+    container.innerHTML = "";
+
+    document.getElementById(
+        "recordCount"
+    ).textContent =
+        "📋 Total Records: " +
+        records.length;
+
+
+    if (
+        records.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <div class="record">
+
+                <div class="record-title">
+                    🚛 No Records
+                </div>
+
+                <p>
+                    No vehicle information
+                    has been submitted yet.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    records.forEach(
+        function(record, index) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+            div.className =
+                "record";
+
+
+            div.innerHTML = `
+
+                <div class="record-title">
+                    🚛 Record ${index + 1}
+                </div>
+
+                <div class="record-row">
+                    <strong>👤 User ID:</strong>
+                    ${escapeHTML(record.userId)}
+                </div>
+
+                <div class="record-row">
+                    <strong>🚚 Vehicle Name:</strong>
+                    ${escapeHTML(record.vehicleName)}
+                </div>
+
+                <div class="record-row">
+                    <strong>👤 Owner Name:</strong>
+                    ${escapeHTML(record.ownerName)}
+                </div>
+
+                <div class="record-row">
+                    <strong>📅 Vehicle Age:</strong>
+                    ${escapeHTML(record.vehicleAge)}
+                </div>
+
+                <div class="record-row">
+                    <strong>⛽ Vehicle Mileage:</strong>
+                    ${escapeHTML(record.vehicleMileage)}
+                </div>
+
+                <div class="record-row">
+                    <strong>🛣️ Vehicle KM:</strong>
+                    ${escapeHTML(record.vehicleKm)}
+                </div>
+
+                <div class="record-row">
+                    <strong>📍 Origin:</strong>
+                    ${escapeHTML(record.origin)}
+                </div>
+
+                <div class="record-row">
+                    <strong>🏁 Destination:</strong>
+                    ${escapeHTML(record.destination)}
+                </div>
+
+                <div class="record-row">
+                    <strong>🕐 Start Time:</strong>
+                    ${escapeHTML(
+                        formatTransportTime(
+                            record.startTime
+                        )
+                    )}
+                </div>
+
+                <div class="record-row">
+                    <strong>🕐 Target End Time:</strong>
+                    ${escapeHTML(
+                        formatTransportTime(
+                            record.targetEndTime
+                        )
+                    )}
+                </div>
+
+                <div class="record-row">
+                    <strong>👨‍✈️ Driver Name:</strong>
+                    ${escapeHTML(record.driverName)}
+                </div>
+
+                <div class="record-row">
+                    <strong>📅 Entry Date:</strong>
+                    ${escapeHTML(
+                        formatEntryDate(
+                            record.entryDate
+                        )
+                    )}
+                </div>
+
+                <div class="record-row">
+                    <strong>💾 Saved At:</strong>
+                    ${escapeHTML(
+                        formatDateTime(
+                            record.savedAt
+                        )
+                    )}
+                </div>
+
+                ${
+                    record.updatedAt
+                    ?
+                    `
+                    <div class="record-row">
+                        <strong>✏️ Updated At:</strong>
+                        ${escapeHTML(
+                            formatDateTime(
+                                record.updatedAt
+                            )
+                        )}
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+                <div class="admin-actions">
+
+                    <button
+                        class="edit-btn"
+                        onclick="editRecord(${index})">
+
+                        ✏️ Update This Record
+
+                    </button>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteRecord(${index})">
+
+                        🗑️ Delete This Record
+
+                    </button>
+
+                </div>
+
+            `;
+
+            container.appendChild(div);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   UPDATE RECORD
 ===================================================== */
 
 function editRecord(index) {
@@ -2718,16 +2339,11 @@ function editRecord(index) {
             )
         ) || [];
 
-
     const record =
         records[index];
 
-
-    if (!record) {
-
+    if (!record)
         return;
-
-    }
 
 
     const vehicleName =
@@ -2736,10 +2352,8 @@ function editRecord(index) {
             record.vehicleName || ""
         );
 
-
-    if (
-        vehicleName === null
-    ) return;
+    if (vehicleName === null)
+        return;
 
 
     const ownerName =
@@ -2748,10 +2362,8 @@ function editRecord(index) {
             record.ownerName || ""
         );
 
-
-    if (
-        ownerName === null
-    ) return;
+    if (ownerName === null)
+        return;
 
 
     const vehicleAge =
@@ -2760,10 +2372,8 @@ function editRecord(index) {
             record.vehicleAge || ""
         );
 
-
-    if (
-        vehicleAge === null
-    ) return;
+    if (vehicleAge === null)
+        return;
 
 
     const vehicleMileage =
@@ -2772,10 +2382,8 @@ function editRecord(index) {
             record.vehicleMileage || ""
         );
 
-
-    if (
-        vehicleMileage === null
-    ) return;
+    if (vehicleMileage === null)
+        return;
 
 
     const vehicleKm =
@@ -2784,10 +2392,8 @@ function editRecord(index) {
             record.vehicleKm || ""
         );
 
-
-    if (
-        vehicleKm === null
-    ) return;
+    if (vehicleKm === null)
+        return;
 
 
     const origin =
@@ -2796,10 +2402,8 @@ function editRecord(index) {
             record.origin || ""
         );
 
-
-    if (
-        origin === null
-    ) return;
+    if (origin === null)
+        return;
 
 
     const destination =
@@ -2808,10 +2412,8 @@ function editRecord(index) {
             record.destination || ""
         );
 
-
-    if (
-        destination === null
-    ) return;
+    if (destination === null)
+        return;
 
 
     const startTime =
@@ -2820,10 +2422,8 @@ function editRecord(index) {
             record.startTime || ""
         );
 
-
-    if (
-        startTime === null
-    ) return;
+    if (startTime === null)
+        return;
 
 
     const targetEndTime =
@@ -2832,10 +2432,8 @@ function editRecord(index) {
             record.targetEndTime || ""
         );
 
-
-    if (
-        targetEndTime === null
-    ) return;
+    if (targetEndTime === null)
+        return;
 
 
     const driverName =
@@ -2844,10 +2442,8 @@ function editRecord(index) {
             record.driverName || ""
         );
 
-
-    if (
-        driverName === null
-    ) return;
+    if (driverName === null)
+        return;
 
 
     const entryDate =
@@ -2856,63 +2452,42 @@ function editRecord(index) {
             record.entryDate || ""
         );
 
-
-    if (
-        entryDate === null
-    ) return;
+    if (entryDate === null)
+        return;
 
 
     record.vehicleName =
         vehicleName.trim();
 
-
     record.ownerName =
         ownerName.trim();
-
 
     record.vehicleAge =
         vehicleAge;
 
-
     record.vehicleMileage =
         vehicleMileage;
-
 
     record.vehicleKm =
         vehicleKm;
 
-
     record.origin =
         origin.trim();
-
 
     record.destination =
         destination.trim();
 
-
-    /*
-       Keep transport times timezone-independent.
-    */
-
     record.startTime =
         startTime;
-
 
     record.targetEndTime =
         targetEndTime;
 
-
     record.driverName =
         driverName.trim();
 
-
     record.entryDate =
         entryDate;
-
-
-    /*
-       Store update time as ISO.
-    */
 
     record.updatedAt =
         new Date().toISOString();
@@ -2920,9 +2495,7 @@ function editRecord(index) {
 
     localStorage.setItem(
         "vehicleRecords",
-        JSON.stringify(
-            records
-        )
+        JSON.stringify(records)
     );
 
 
@@ -2937,7 +2510,7 @@ function editRecord(index) {
 
 
 /* =====================================================
-   ADMIN DELETE
+   DELETE RECORD
 ===================================================== */
 
 function deleteRecord(index) {
@@ -2950,13 +2523,8 @@ function deleteRecord(index) {
         ) || [];
 
 
-    if (
-        !records[index]
-    ) {
-
+    if (!records[index])
         return;
-
-    }
 
 
     const answer =
@@ -2967,11 +2535,8 @@ function deleteRecord(index) {
         );
 
 
-    if (!answer) {
-
+    if (!answer)
         return;
-
-    }
 
 
     records.splice(
@@ -2982,9 +2547,7 @@ function deleteRecord(index) {
 
     localStorage.setItem(
         "vehicleRecords",
-        JSON.stringify(
-            records
-        )
+        JSON.stringify(records)
     );
 
 
@@ -3007,12 +2570,8 @@ function escapeHTML(value) {
     if (
         value === null ||
         value === undefined
-    ) {
-
+    )
         return "";
-
-    }
-
 
     return String(value)
 
@@ -3051,46 +2610,30 @@ function escapeHTML(value) {
 function logout() {
 
     document
-        .getElementById(
-            "userPage"
-        )
+        .getElementById("userPage")
         .classList
-        .add(
-            "hidden"
-        );
+        .add("hidden");
 
 
     document
-        .getElementById(
-            "adminPage"
-        )
+        .getElementById("adminPage")
         .classList
-        .add(
-            "hidden"
-        );
+        .add("hidden");
 
 
     document
-        .getElementById(
-            "loginPage"
-        )
+        .getElementById("loginPage")
         .classList
-        .remove(
-            "hidden"
-        );
+        .remove("hidden");
 
 
     document
-        .getElementById(
-            "adminLoginForm"
-        )
+        .getElementById("adminLoginForm")
         .reset();
 
 
     document
-        .getElementById(
-            "vehicleForm"
-        )
+        .getElementById("vehicleForm")
         .reset();
 
 
@@ -3104,6 +2647,33 @@ function logout() {
 ===================================================== */
 
 changeRole();
+
+
+/* =====================================================
+   ENSURE VIDEO PLAYS
+===================================================== */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        const video =
+            document.getElementById(
+                "transportVideo"
+            );
+
+        video.play().catch(
+            function() {
+
+                console.log(
+                    "Video autoplay was blocked."
+                );
+
+            }
+        );
+
+    }
+);
 
 </script>
 
