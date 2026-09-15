@@ -10,7 +10,6 @@
 
 <title>🚛 Ponnar Sankar Pranav Transport</title>
 
-
 <style>
 
 /* =====================================================
@@ -36,15 +35,11 @@ body {
         Helvetica,
         sans-serif;
 
-    background: #000;
-
     min-height: 100vh;
-
-    padding: 20px;
 
     overflow-x: hidden;
 
-    position: relative;
+    background: #000;
 
 }
 
@@ -53,7 +48,7 @@ body {
    FULL SCREEN VIDEO BACKGROUND
 ===================================================== */
 
-.transport-video {
+#transportVideo {
 
     position: fixed;
 
@@ -65,9 +60,7 @@ body {
 
     object-fit: cover;
 
-    object-position: center center;
-
-    z-index: -10;
+    z-index: -3;
 
     pointer-events: none;
 
@@ -75,8 +68,7 @@ body {
 
 
 /* =====================================================
-   VERY LIGHT VIDEO OVERLAY
-   VIDEO SHOULD REMAIN CLEARLY VISIBLE
+   VIDEO DARK/LIGHT OVERLAY
 ===================================================== */
 
 .video-overlay {
@@ -86,13 +78,13 @@ body {
     top: 0;
     left: 0;
 
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 
     background:
-        rgba(255, 255, 255, 0.06);
+        rgba(0, 0, 0, 0.25);
 
-    z-index: -9;
+    z-index: -2;
 
     pointer-events: none;
 
@@ -100,44 +92,34 @@ body {
 
 
 /* =====================================================
-   MAIN CONTAINERS
+   LIGHT GLASS EFFECT
 ===================================================== */
 
-#loginPage,
-#userPage,
-#adminPage {
+.page-panel {
 
     width: 850px;
 
-    max-width: 100%;
+    max-width: calc(100% - 30px);
 
-    margin: 30px auto;
+    margin: 25px auto 40px auto;
 
-    /*
-       LIGHT TRANSPARENT PANEL
-       VIDEO REMAINS VISIBLE
-    */
+    padding: 30px;
 
     background:
         rgba(
             255,
             255,
             255,
-            0.72
+            0.88
         );
 
-    padding: 30px;
+    backdrop-filter:
+        blur(8px);
 
-    border-radius: 20px;
+    -webkit-backdrop-filter:
+        blur(8px);
 
-    box-shadow:
-        0 8px 30px
-        rgba(
-            0,
-            0,
-            0,
-            0.18
-        );
+    border-radius: 22px;
 
     border:
         1px solid
@@ -145,14 +127,67 @@ body {
             255,
             255,
             255,
-            0.85
+            0.75
         );
 
-    backdrop-filter:
-        blur(3px);
+    box-shadow:
+        0 15px 45px
+        rgba(
+            0,
+            0,
+            0,
+            0.30
+        );
 
-    -webkit-backdrop-filter:
-        blur(3px);
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+/* =====================================================
+   TOP TOOLTIP STYLE
+===================================================== */
+
+.tooltip-panel {
+
+    position: relative;
+
+    margin-top: 20px;
+
+}
+
+.tooltip-panel::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -12px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 0;
+    height: 0;
+
+    border-left:
+        12px solid transparent;
+
+    border-right:
+        12px solid transparent;
+
+    border-bottom:
+        12px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.88
+        );
 
 }
 
@@ -174,8 +209,7 @@ body {
     margin-bottom: 8px;
 
     animation:
-        titleGlow
-        2s ease-in-out infinite;
+        titleGlow 2s ease-in-out infinite;
 
 }
 
@@ -241,13 +275,13 @@ body {
 
     margin-bottom: 25px;
 
-    font-size: 18px;
+    font-size: 16px;
 
 }
 
 
 /* =====================================================
-   CARTOON TRUCK
+   TRUCK ICON
 ===================================================== */
 
 .cartoon-truck {
@@ -256,7 +290,7 @@ body {
 
     font-size: 70px;
 
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 
     animation:
         bounceTruck
@@ -310,26 +344,11 @@ h3 {
 
     margin-bottom: 15px;
 
-    padding: 10px;
-
-    border-radius: 8px;
-
-    background:
-        rgba(
-            219,
-            234,
-            254,
-            0.55
-        );
+    padding-bottom: 8px;
 
     border-bottom:
         3px solid
-        rgba(
-            37,
-            99,
-            235,
-            0.55
-        );
+        #60a5fa;
 
 }
 
@@ -366,14 +385,9 @@ input {
 
     border:
         1px solid
-        rgba(
-            148,
-            163,
-            184,
-            0.65
-        );
+        #cbd5e1;
 
-    border-radius: 8px;
+    border-radius: 9px;
 
     font-size: 16px;
 
@@ -382,10 +396,8 @@ input {
             255,
             255,
             255,
-            0.88
+            0.94
         );
-
-    color: #1e293b;
 
     transition:
         0.25s;
@@ -399,14 +411,6 @@ input:focus {
 
     border-color:
         #2563eb;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.98
-        );
 
     box-shadow:
         0 0 0 3px
@@ -435,7 +439,7 @@ button {
 
     border: none;
 
-    border-radius: 8px;
+    border-radius: 9px;
 
     background:
         linear-gradient(
@@ -463,7 +467,7 @@ button {
             37,
             99,
             235,
-            0.2
+            0.20
         );
 
 }
@@ -480,7 +484,7 @@ button:hover {
             37,
             99,
             235,
-            0.3
+            0.30
         );
 
 }
@@ -581,7 +585,7 @@ button:hover {
             220,
             252,
             231,
-            0.88
+            0.95
         );
 
     color: #166534;
@@ -596,7 +600,7 @@ button:hover {
             254,
             226,
             226,
-            0.88
+            0.95
         );
 
     color: #991b1b;
@@ -611,7 +615,7 @@ button:hover {
             219,
             234,
             254,
-            0.88
+            0.95
         );
 
     color: #1e40af;
@@ -642,12 +646,7 @@ button:hover {
 
     border:
         2px solid
-        rgba(
-            226,
-            232,
-            240,
-            0.85
-        );
+        #dbe3ee;
 
     border-radius: 12px;
 
@@ -662,7 +661,7 @@ button:hover {
             248,
             250,
             252,
-            0.70
+            0.88
         );
 
     transition:
@@ -681,7 +680,7 @@ button:hover {
             239,
             246,
             255,
-            0.85
+            0.95
         );
 
     transform:
@@ -710,7 +709,7 @@ button:hover {
             236,
             253,
             245,
-            0.82
+            0.92
         );
 
     border:
@@ -755,10 +754,10 @@ button:hover {
 
     background:
         rgba(
-            219,
-            234,
-            254,
-            0.78
+            239,
+            246,
+            255,
+            0.92
         );
 
     color:
@@ -780,7 +779,7 @@ button:hover {
 
 
 /* =====================================================
-   RECORD CARD
+   LIGHT RECORD TABLE/CARD
 ===================================================== */
 
 .record {
@@ -790,45 +789,35 @@ button:hover {
             255,
             255,
             255,
-            0.68
+            0.78
         );
 
     border:
         1px solid
         rgba(
-            148,
-            163,
-            184,
-            0.45
+            203,
+            213,
+            225,
+            0.90
         );
 
     border-radius: 15px;
 
-    padding: 22px;
+    padding: 20px;
 
-    margin-bottom: 25px;
+    margin-bottom: 22px;
 
     box-shadow:
-        0 4px 12px
+        0 5px 18px
         rgba(
             0,
             0,
             0,
-            0.08
+            0.07
         );
-
-    backdrop-filter:
-        blur(2px);
-
-    -webkit-backdrop-filter:
-        blur(2px);
 
     transition:
         0.25s;
-
-    animation:
-        recordAppear
-        0.5s ease;
 
 }
 
@@ -838,37 +827,22 @@ button:hover {
     transform:
         translateY(-3px);
 
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.92
+        );
+
     box-shadow:
-        0 9px 22px
+        0 9px 25px
         rgba(
             0,
             0,
             0,
             0.12
         );
-
-}
-
-
-@keyframes recordAppear {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(15px);
-
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-
-    }
 
 }
 
@@ -888,26 +862,11 @@ button:hover {
 
     margin-bottom: 15px;
 
-    padding: 10px;
-
-    border-radius: 8px;
-
-    background:
-        rgba(
-            219,
-            234,
-            254,
-            0.55
-        );
+    padding-bottom: 10px;
 
     border-bottom:
         3px solid
-        rgba(
-            37,
-            99,
-            235,
-            0.55
-        );
+        #93c5fd;
 
 }
 
@@ -918,28 +877,38 @@ button:hover {
 
 .record-row {
 
-    padding:
-        10px 12px;
-
-    margin-bottom: 2px;
+    padding: 10px 12px;
 
     border-bottom:
         1px solid
         rgba(
-            203,
-            213,
-            225,
-            0.55
+            226,
+            232,
+            240,
+            0.9
         );
 
     line-height: 1.6;
 
     background:
         rgba(
+            248,
+            250,
+            252,
+            0.55
+        );
+
+}
+
+
+.record-row:nth-child(even) {
+
+    background:
+        rgba(
+            239,
+            246,
             255,
-            255,
-            255,
-            0.28
+            0.45
         );
 
 }
@@ -969,29 +938,18 @@ button:hover {
 
 @media (max-width: 600px) {
 
-    body {
+    .page-panel {
 
-        padding: 10px;
+        width: calc(100% - 16px);
 
-    }
+        max-width: none;
 
-
-    #loginPage,
-    #userPage,
-    #adminPage {
+        margin:
+            15px auto 25px auto;
 
         padding: 20px;
 
-        margin:
-            10px auto;
-
-        background:
-            rgba(
-                255,
-                255,
-                255,
-                0.76
-            );
+        border-radius: 17px;
 
     }
 
@@ -1029,27 +987,10 @@ button:hover {
     }
 
 
-    .transport-video {
+    #transportVideo {
 
         object-position:
             center center;
-
-    }
-
-}
-
-
-/* =====================================================
-   REDUCED MOTION
-===================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .cartoon-truck,
-    .main-title,
-    .record {
-
-        animation: none;
 
     }
 
@@ -1064,12 +1005,11 @@ button:hover {
 
 
 <!-- =====================================================
-     FULL SCREEN TRUCK VIDEO
+     FULL SCREEN BACKGROUND VIDEO
 ===================================================== -->
 
 <video
     id="transportVideo"
-    class="transport-video"
     autoplay
     muted
     loop
@@ -1079,11 +1019,9 @@ button:hover {
 
     <source
         src="truck-video.mp4"
-        type="video/mp4"
-    >
+        type="video/mp4">
 
-    Your browser does not support
-    background video.
+    Your browser does not support video.
 
 </video>
 
@@ -1096,7 +1034,10 @@ button:hover {
      LOGIN PAGE
 ===================================================== -->
 
-<div id="loginPage">
+<div
+    id="loginPage"
+    class="page-panel tooltip-panel"
+>
 
 
     <div class="cartoon-truck">
@@ -1159,9 +1100,7 @@ button:hover {
 
 
 
-    <!-- =================================================
-         ADMIN LOGIN
-    ================================================= -->
+    <!-- ADMIN LOGIN -->
 
     <div id="adminLogin">
 
@@ -1215,15 +1154,12 @@ button:hover {
 
 
 
-    <!-- =================================================
-         USER
-    ================================================= -->
+    <!-- USER LOGIN -->
 
     <div
         id="userLogin"
         class="hidden"
     >
-
 
         <div class="message info">
 
@@ -1246,7 +1182,6 @@ button:hover {
 
         </button>
 
-
     </div>
 
 
@@ -1266,7 +1201,7 @@ button:hover {
 
 <div
     id="userPage"
-    class="hidden"
+    class="page-panel tooltip-panel hidden"
 >
 
 
@@ -1402,7 +1337,6 @@ button:hover {
         </div>
 
 
-
         <h3>
             🛣️ Transport Information
         </h3>
@@ -1536,7 +1470,7 @@ button:hover {
 
 <div
     id="adminPage"
-    class="hidden"
+    class="page-panel tooltip-panel hidden"
 >
 
 
@@ -1576,7 +1510,9 @@ button:hover {
     ></div>
 
 
-    <div id="recordsContainer"></div>
+    <div
+        id="recordsContainer"
+    ></div>
 
 
     <button
@@ -1602,7 +1538,6 @@ button:hover {
 
 <script>
 
-
 /* =====================================================
    ADMIN LOGIN
 ===================================================== */
@@ -1615,7 +1550,7 @@ const ADMIN_PASSWORD =
 
 
 /* =====================================================
-   USER ID
+   GET USER ID
 ===================================================== */
 
 function getUserId() {
@@ -1624,7 +1559,6 @@ function getUserId() {
         localStorage.getItem(
             "transportUserId"
         );
-
 
     if (!userId) {
 
@@ -1636,14 +1570,12 @@ function getUserId() {
                 Math.random() * 10000
             );
 
-
         localStorage.setItem(
             "transportUserId",
             userId
         );
 
     }
-
 
     return userId;
 
@@ -1657,35 +1589,24 @@ function getUserId() {
 function formatDateTime(value) {
 
     if (!value) {
-
         return "";
-
     }
-
 
     const date =
         new Date(value);
-
 
     if (
         isNaN(
             date.getTime()
         )
     ) {
-
         return value;
-
     }
-
 
     const day =
         String(
             date.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
-
+        ).padStart(2, "0");
 
     const monthNames = [
 
@@ -1704,60 +1625,40 @@ function formatDateTime(value) {
 
     ];
 
-
     const month =
         monthNames[
             date.getMonth()
         ];
 
-
     const year =
         date.getFullYear();
-
 
     let hours =
         date.getHours();
 
-
     const minutes =
         String(
             date.getMinutes()
-        ).padStart(
-            2,
-            "0"
-        );
-
+        ).padStart(2, "0");
 
     const ampm =
         hours >= 12
             ? "PM"
             : "AM";
 
-
     hours =
         hours % 12;
 
-
-    if (
-        hours === 0
-    ) {
-
+    if (hours === 0) {
         hours = 12;
-
     }
-
 
     hours =
         String(
             hours
-        ).padStart(
-            2,
-            "0"
-        );
-
+        ).padStart(2, "0");
 
     return (
-
         day +
         " " +
         month +
@@ -1769,14 +1670,13 @@ function formatDateTime(value) {
         minutes +
         " " +
         ampm
-
     );
 
 }
 
 
 /* =====================================================
-   LOCAL DATE
+   GET LOCAL DATE
 ===================================================== */
 
 function getLocalDate() {
@@ -1784,44 +1684,32 @@ function getLocalDate() {
     const now =
         new Date();
 
-
     const year =
         now.getFullYear();
-
 
     const month =
         String(
             now.getMonth() + 1
-        ).padStart(
-            2,
-            "0"
-        );
-
+        ).padStart(2, "0");
 
     const day =
         String(
             now.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
-
+        ).padStart(2, "0");
 
     return (
-
         year +
         "-" +
         month +
         "-" +
         day
-
     );
 
 }
 
 
 /* =====================================================
-   TODAY
+   SET TODAY
 ===================================================== */
 
 function setToday() {
@@ -1831,7 +1719,7 @@ function setToday() {
             "entryDate"
         )
         .value =
-        getLocalDate();
+            getLocalDate();
 
 }
 
@@ -1847,48 +1735,35 @@ function changeRole() {
             'input[name="role"]:checked'
         ).value;
 
-
     const adminLogin =
         document.getElementById(
             "adminLogin"
         );
-
 
     const userLogin =
         document.getElementById(
             "userLogin"
         );
 
-
     const message =
         document.getElementById(
             "loginMessage"
         );
 
-
     message.textContent = "";
-
 
     message.className =
         "message";
 
-
-    if (
-        role === "admin"
-    ) {
+    if (role === "admin") {
 
         adminLogin
             .classList
-            .remove(
-                "hidden"
-            );
-
+            .remove("hidden");
 
         userLogin
             .classList
-            .add(
-                "hidden"
-            );
+            .add("hidden");
 
     }
 
@@ -1896,16 +1771,11 @@ function changeRole() {
 
         adminLogin
             .classList
-            .add(
-                "hidden"
-            );
-
+            .add("hidden");
 
         userLogin
             .classList
-            .remove(
-                "hidden"
-            );
+            .remove("hidden");
 
     }
 
@@ -1926,7 +1796,6 @@ document
 
             event.preventDefault();
 
-
             const id =
                 document
                 .getElementById(
@@ -1935,7 +1804,6 @@ document
                 .value
                 .trim();
 
-
             const password =
                 document
                 .getElementById(
@@ -1943,12 +1811,10 @@ document
                 )
                 .value;
 
-
             const message =
                 document.getElementById(
                     "loginMessage"
                 );
-
 
             if (
                 id === ADMIN_ID &&
@@ -1958,10 +1824,8 @@ document
                 message.textContent =
                     "✅ Admin login successful.";
 
-
                 message.className =
                     "message success";
-
 
                 setTimeout(
                     showAdminPage,
@@ -1974,7 +1838,6 @@ document
 
                 message.textContent =
                     "❌ Invalid Admin ID or Password.";
-
 
                 message.className =
                     "message error";
@@ -1996,51 +1859,44 @@ function openUserPage() {
             "loginPage"
         )
         .classList
-        .add(
-            "hidden"
-        );
-
+        .add("hidden");
 
     document
         .getElementById(
             "adminPage"
         )
         .classList
-        .add(
-            "hidden"
-        );
-
+        .add("hidden");
 
     document
         .getElementById(
             "userPage"
         )
         .classList
-        .remove(
-            "hidden"
-        );
-
+        .remove("hidden");
 
     const userId =
         getUserId();
 
+    document
+        .getElementById(
+            "currentUserId"
+        )
+        .textContent =
+            userId;
 
-    document.getElementById(
-        "currentUserId"
-    ).textContent =
-        userId;
+    document
+        .getElementById(
+            "userMessage"
+        )
+        .textContent = "";
 
-
-    document.getElementById(
-        "userMessage"
-    ).textContent = "";
-
-
-    document.getElementById(
-        "userMessage"
-    ).className =
-        "message";
-
+    document
+        .getElementById(
+            "userMessage"
+        )
+        .className =
+            "message";
 
     setToday();
 
@@ -2048,7 +1904,7 @@ function openUserPage() {
 
 
 /* =====================================================
-   USER SUBMIT NEW RECORD
+   USER SUBMIT
 ===================================================== */
 
 document
@@ -2061,20 +1917,16 @@ document
 
             event.preventDefault();
 
-
             const userId =
                 getUserId();
-
 
             const record = {
 
                 recordNumber:
                     Date.now(),
 
-
                 userId:
                     userId,
-
 
                 vehicleName:
                     document
@@ -2084,7 +1936,6 @@ document
                     .value
                     .trim(),
 
-
                 ownerName:
                     document
                     .getElementById(
@@ -2093,14 +1944,12 @@ document
                     .value
                     .trim(),
 
-
                 vehicleAge:
                     document
                     .getElementById(
                         "vehicleAge"
                     )
                     .value,
-
 
                 vehicleMileage:
                     document
@@ -2109,14 +1958,12 @@ document
                     )
                     .value,
 
-
                 vehicleKm:
                     document
                     .getElementById(
                         "vehicleKm"
                     )
                     .value,
-
 
                 origin:
                     document
@@ -2126,7 +1973,6 @@ document
                     .value
                     .trim(),
 
-
                 destination:
                     document
                     .getElementById(
@@ -2135,12 +1981,6 @@ document
                     .value
                     .trim(),
 
-
-                /*
-                   TIME IS STORED EXACTLY
-                   AS ENTERED.
-                */
-
                 startTime:
                     document
                     .getElementById(
@@ -2148,14 +1988,12 @@ document
                     )
                     .value,
 
-
                 targetEndTime:
                     document
                     .getElementById(
                         "targetEndTime"
                     )
                     .value,
-
 
                 driverName:
                     document
@@ -2165,14 +2003,12 @@ document
                     .value
                     .trim(),
 
-
                 entryDate:
                     document
                     .getElementById(
                         "entryDate"
                     )
                     .value,
-
 
                 savedAt:
                     new Date().toISOString()
@@ -2188,21 +2024,12 @@ document
                 ) || [];
 
 
-            /*
-               ALWAYS CREATE
-               A NEW RECORD.
-            */
-
-            records.push(
-                record
-            );
+            records.push(record);
 
 
             localStorage.setItem(
                 "vehicleRecords",
-                JSON.stringify(
-                    records
-                )
+                JSON.stringify(records)
             );
 
 
@@ -2245,30 +2072,21 @@ function showAdminPage() {
             "loginPage"
         )
         .classList
-        .add(
-            "hidden"
-        );
-
+        .add("hidden");
 
     document
         .getElementById(
             "userPage"
         )
         .classList
-        .add(
-            "hidden"
-        );
-
+        .add("hidden");
 
     document
         .getElementById(
             "adminPage"
         )
         .classList
-        .remove(
-            "hidden"
-        );
-
+        .remove("hidden");
 
     loadRecords();
 
@@ -2276,206 +2094,7 @@ function showAdminPage() {
 
 
 /* =====================================================
-   TRANSPORT TIME FORMAT
-   NO TIMEZONE CONVERSION
-===================================================== */
-
-function formatTransportTime(value) {
-
-    if (!value) {
-
-        return "";
-
-    }
-
-
-    const match =
-        String(value).match(
-            /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/
-        );
-
-
-    if (!match) {
-
-        return value;
-
-    }
-
-
-    const year =
-        match[1];
-
-
-    const monthNumber =
-        Number(
-            match[2]
-        );
-
-
-    const day =
-        match[3];
-
-
-    let hours =
-        Number(
-            match[4]
-        );
-
-
-    const minutes =
-        match[5];
-
-
-    const monthNames = [
-
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-
-    ];
-
-
-    const month =
-        monthNames[
-            monthNumber - 1
-        ];
-
-
-    const ampm =
-        hours >= 12
-            ? "PM"
-            : "AM";
-
-
-    hours =
-        hours % 12;
-
-
-    if (
-        hours === 0
-    ) {
-
-        hours = 12;
-
-    }
-
-
-    const displayHours =
-        String(
-            hours
-        ).padStart(
-            2,
-            "0"
-        );
-
-
-    return (
-
-        day +
-        " " +
-        month +
-        " " +
-        year +
-        ", " +
-        displayHours +
-        ":" +
-        minutes +
-        " " +
-        ampm
-
-    );
-
-}
-
-
-/* =====================================================
-   ENTRY DATE FORMAT
-===================================================== */
-
-function formatEntryDate(value) {
-
-    if (!value) {
-
-        return "";
-
-    }
-
-
-    const match =
-        String(value).match(
-            /^(\d{4})-(\d{2})-(\d{2})$/
-        );
-
-
-    if (!match) {
-
-        return value;
-
-    }
-
-
-    const year =
-        match[1];
-
-
-    const monthNumber =
-        Number(
-            match[2]
-        );
-
-
-    const day =
-        match[3];
-
-
-    const monthNames = [
-
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-
-    ];
-
-
-    const month =
-        monthNames[
-            monthNumber - 1
-        ];
-
-
-    return (
-
-        day +
-        " " +
-        month +
-        " " +
-        year
-
-    );
-
-}
-
-
-/* =====================================================
-   LOAD ALL RECORDS
+   LOAD RECORDS
 ===================================================== */
 
 function loadRecords() {
@@ -2485,7 +2104,6 @@ function loadRecords() {
             "recordsContainer"
         );
 
-
     const records =
         JSON.parse(
             localStorage.getItem(
@@ -2493,17 +2111,15 @@ function loadRecords() {
             )
         ) || [];
 
+    container.innerHTML = "";
 
-    container.innerHTML =
-        "";
-
-
-    document.getElementById(
-        "recordCount"
-    ).textContent =
-
-        "📋 Total Records: " +
-        records.length;
+    document
+        .getElementById(
+            "recordCount"
+        )
+        .textContent =
+            "📋 Total Records: " +
+            records.length;
 
 
     if (
@@ -2515,22 +2131,17 @@ function loadRecords() {
             <div class="record">
 
                 <div class="record-title">
-
                     🚛 No Records
-
                 </div>
 
                 <p>
-
                     No vehicle information
                     has been submitted yet.
-
                 </p>
 
             </div>
 
         `;
-
 
         return;
 
@@ -2544,7 +2155,6 @@ function loadRecords() {
                 document.createElement(
                     "div"
                 );
-
 
             div.className =
                 "record";
@@ -2763,7 +2373,6 @@ function loadRecords() {
 
                 <div class="admin-actions">
 
-
                     <button
                         class="edit-btn"
                         onclick="editRecord(${index})">
@@ -2781,15 +2390,12 @@ function loadRecords() {
 
                     </button>
 
-
                 </div>
 
             `;
 
 
-            container.appendChild(
-                div
-            );
+            container.appendChild(div);
 
         }
     );
@@ -2798,7 +2404,159 @@ function loadRecords() {
 
 
 /* =====================================================
-   ADMIN UPDATE
+   TRANSPORT TIME FORMAT
+===================================================== */
+
+function formatTransportTime(value) {
+
+    if (!value) {
+        return "";
+    }
+
+    const match =
+        String(value).match(
+            /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/
+        );
+
+    if (!match) {
+        return value;
+    }
+
+    const year =
+        match[1];
+
+    const monthNumber =
+        Number(match[2]);
+
+    const day =
+        match[3];
+
+    let hours =
+        Number(match[4]);
+
+    const minutes =
+        match[5];
+
+    const monthNames = [
+
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+
+    ];
+
+    const month =
+        monthNames[
+            monthNumber - 1
+        ];
+
+    const ampm =
+        hours >= 12
+            ? "PM"
+            : "AM";
+
+    hours =
+        hours % 12;
+
+    if (hours === 0) {
+        hours = 12;
+    }
+
+    const displayHours =
+        String(hours)
+        .padStart(2, "0");
+
+    return (
+
+        day +
+        " " +
+        month +
+        " " +
+        year +
+        ", " +
+        displayHours +
+        ":" +
+        minutes +
+        " " +
+        ampm
+
+    );
+
+}
+
+
+/* =====================================================
+   ENTRY DATE FORMAT
+===================================================== */
+
+function formatEntryDate(value) {
+
+    if (!value) {
+        return "";
+    }
+
+    const match =
+        String(value).match(
+            /^(\d{4})-(\d{2})-(\d{2})$/
+        );
+
+    if (!match) {
+        return value;
+    }
+
+    const year =
+        match[1];
+
+    const monthNumber =
+        Number(match[2]);
+
+    const day =
+        match[3];
+
+    const monthNames = [
+
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+
+    ];
+
+    const month =
+        monthNames[
+            monthNumber - 1
+        ];
+
+    return (
+        day +
+        " " +
+        month +
+        " " +
+        year
+    );
+
+}
+
+
+/* =====================================================
+   UPDATE RECORD
 ===================================================== */
 
 function editRecord(index) {
@@ -2810,15 +2568,11 @@ function editRecord(index) {
             )
         ) || [];
 
-
     const record =
         records[index];
 
-
     if (!record) {
-
         return;
-
     }
 
 
@@ -2828,11 +2582,9 @@ function editRecord(index) {
             record.vehicleName || ""
         );
 
-
     if (
         vehicleName === null
-    )
-        return;
+    ) return;
 
 
     const ownerName =
@@ -2841,11 +2593,9 @@ function editRecord(index) {
             record.ownerName || ""
         );
 
-
     if (
         ownerName === null
-    )
-        return;
+    ) return;
 
 
     const vehicleAge =
@@ -2854,11 +2604,9 @@ function editRecord(index) {
             record.vehicleAge || ""
         );
 
-
     if (
         vehicleAge === null
-    )
-        return;
+    ) return;
 
 
     const vehicleMileage =
@@ -2867,11 +2615,9 @@ function editRecord(index) {
             record.vehicleMileage || ""
         );
 
-
     if (
         vehicleMileage === null
-    )
-        return;
+    ) return;
 
 
     const vehicleKm =
@@ -2880,11 +2626,9 @@ function editRecord(index) {
             record.vehicleKm || ""
         );
 
-
     if (
         vehicleKm === null
-    )
-        return;
+    ) return;
 
 
     const origin =
@@ -2893,11 +2637,9 @@ function editRecord(index) {
             record.origin || ""
         );
 
-
     if (
         origin === null
-    )
-        return;
+    ) return;
 
 
     const destination =
@@ -2906,11 +2648,9 @@ function editRecord(index) {
             record.destination || ""
         );
 
-
     if (
         destination === null
-    )
-        return;
+    ) return;
 
 
     const startTime =
@@ -2919,11 +2659,9 @@ function editRecord(index) {
             record.startTime || ""
         );
 
-
     if (
         startTime === null
-    )
-        return;
+    ) return;
 
 
     const targetEndTime =
@@ -2932,11 +2670,9 @@ function editRecord(index) {
             record.targetEndTime || ""
         );
 
-
     if (
         targetEndTime === null
-    )
-        return;
+    ) return;
 
 
     const driverName =
@@ -2945,11 +2681,9 @@ function editRecord(index) {
             record.driverName || ""
         );
 
-
     if (
         driverName === null
-    )
-        return;
+    ) return;
 
 
     const entryDate =
@@ -2958,56 +2692,43 @@ function editRecord(index) {
             record.entryDate || ""
         );
 
-
     if (
         entryDate === null
-    )
-        return;
+    ) return;
 
 
     record.vehicleName =
         vehicleName.trim();
 
-
     record.ownerName =
         ownerName.trim();
-
 
     record.vehicleAge =
         vehicleAge;
 
-
     record.vehicleMileage =
         vehicleMileage;
-
 
     record.vehicleKm =
         vehicleKm;
 
-
     record.origin =
         origin.trim();
-
 
     record.destination =
         destination.trim();
 
-
     record.startTime =
         startTime;
-
 
     record.targetEndTime =
         targetEndTime;
 
-
     record.driverName =
         driverName.trim();
 
-
     record.entryDate =
         entryDate;
-
 
     record.updatedAt =
         new Date().toISOString();
@@ -3015,9 +2736,7 @@ function editRecord(index) {
 
     localStorage.setItem(
         "vehicleRecords",
-        JSON.stringify(
-            records
-        )
+        JSON.stringify(records)
     );
 
 
@@ -3032,7 +2751,7 @@ function editRecord(index) {
 
 
 /* =====================================================
-   ADMIN DELETE
+   DELETE RECORD
 ===================================================== */
 
 function deleteRecord(index) {
@@ -3045,12 +2764,8 @@ function deleteRecord(index) {
         ) || [];
 
 
-    if (
-        !records[index]
-    ) {
-
+    if (!records[index]) {
         return;
-
     }
 
 
@@ -3063,9 +2778,7 @@ function deleteRecord(index) {
 
 
     if (!answer) {
-
         return;
-
     }
 
 
@@ -3077,9 +2790,7 @@ function deleteRecord(index) {
 
     localStorage.setItem(
         "vehicleRecords",
-        JSON.stringify(
-            records
-        )
+        JSON.stringify(records)
     );
 
 
@@ -3150,9 +2861,7 @@ function logout() {
             "userPage"
         )
         .classList
-        .add(
-            "hidden"
-        );
+        .add("hidden");
 
 
     document
@@ -3160,9 +2869,7 @@ function logout() {
             "adminPage"
         )
         .classList
-        .add(
-            "hidden"
-        );
+        .add("hidden");
 
 
     document
@@ -3170,9 +2877,7 @@ function logout() {
             "loginPage"
         )
         .classList
-        .remove(
-            "hidden"
-        );
+        .remove("hidden");
 
 
     document
@@ -3214,12 +2919,11 @@ window.addEventListener(
                 "transportVideo"
             );
 
-
         video.play().catch(
             function() {
 
                 console.log(
-                    "Browser blocked autoplay."
+                    "Video autoplay waiting for browser permission."
                 );
 
             }
@@ -3229,7 +2933,6 @@ window.addEventListener(
 );
 
 </script>
-
 
 </body>
 
